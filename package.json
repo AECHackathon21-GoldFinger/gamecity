@@ -7,9 +7,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "firebase": "^8.10.0",
+    "firebase-tools": "^9.21.0",
     "three": "^0.134.0",
     "vue": "^3.2.20",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@headlessui/vue": "^1.4.1",

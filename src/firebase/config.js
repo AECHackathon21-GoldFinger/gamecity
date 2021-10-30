@@ -1,8 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/storage'
-import 'firebase/analytics'
 import 'firebase/database'
-import 'firebaseui'
 
 import { ref } from 'vue'
 
@@ -16,8 +14,7 @@ const firebaseConfig = {
     appId: "1:474323797617:web:3d59dfe9c4a9376689fdd0"
 };
 
-firebase.initializeApp(firebaseConfig)
-firebase.analytics()
+let app = firebase.initializeApp(firebaseConfig)
 
 const projectStorage = firebase.storage()
 const projectDatabase = firebase.database()

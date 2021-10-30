@@ -1,12 +1,15 @@
 <template>
-  <!-- Three info stuff. -->
-  <div id="info" class="select-none text-indigo-500 text-center pt-3">
-    <strong>Ctrl + Click</strong>: Add Voxel <strong>Shift + Click</strong>:
-    Remove Voxel
-  </div>
-
   <div class="relative">
     <div id="scene"></div>
+  </div>
+
+  <!-- Three info stuff. -->
+  <div
+    id="info"
+    class="select-none font-light text-indigo-500 text-center pt-3"
+  >
+    <strong>Ctrl + Click</strong>: Add Voxel <strong>Shift + Click</strong>:
+    Remove Voxel
   </div>
 </template>
 
@@ -34,8 +37,8 @@ a {
 
 <script type="module">
 import * as THREE from "../../three.module.js";
-import { BoxGeometry, MeshBasicMaterial, HemisphereLight, Mesh } from "../../three.module.js";
 import { OrbitControls } from "../../node_modules/three/examples/jsm/controls/OrbitControls.js";
+import { projectDatabase, projectStorage } from "../firebase/config.js";
 
 let camera, controls, scene, renderer;
 let plane;
@@ -51,6 +54,8 @@ let container;
 const color = 0xf9fafb;
 
 const objects = [];
+
+const project = "Demo";
 
 init();
 render();
@@ -84,7 +89,7 @@ function init() {
   // cubes
 
   cubeGeo = new THREE.BoxGeometry(50, 50, 50);
-  const cubeMaterial = new MeshBasicMaterial({ color: 0x4b5563 });
+  const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0x4b5563 });
 
   // grid
 
@@ -120,7 +125,7 @@ function init() {
   const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
   directionalLight.position.set(1000, 750, 500);
 
-  const hemiLight = new HemisphereLight(0xffffff, 0x71748f, 0.2);
+  const hemiLight = new THREE.HemisphereLight(0xffffff, 0x71748f, 0.2);
   scene.add(hemiLight);
 
   const r = 2000;
@@ -240,6 +245,7 @@ function onPointerDown(event) {
 
       let loc = voxel.position;
       console.log(loc);
+      setCube(project, loc, 0);
 
       scene.add(voxel);
 
@@ -277,5 +283,22 @@ function onDocumentKeyUp(event) {
 function render() {
   controls.update();
   renderer.render(scene, camera);
+}
+
+async function setCube(project, position, type) {
+  const cubesRef = projectDatabase.ref("cubes/");
+  const newCubeRef = cubesRef.push();
+
+  let cube = {
+    position: position,
+    type: type,
+  };
+
+  await newCubeRef.set(cube, (error) => {
+    if (error) {
+      console.log("Error while adding the cubes.");
+      return null;
+    }
+  });
 }
 </script>

@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "default": "goldfinger-42"
+  },
   "targets": {
     "goldfinger-42": {
       "hosting": {
