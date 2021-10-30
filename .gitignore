@@ -5,4 +5,4 @@ dist-ssr
 *.local
 debug.log
 .idea
-config.js
+**\config.js
