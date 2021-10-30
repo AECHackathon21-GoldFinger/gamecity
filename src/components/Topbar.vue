@@ -14,7 +14,7 @@
       >
         <div class="px-4 max-w-7xl sm:px-6 lg:px-8">
           <h1 class="text-2xl font-semibold leading-tight text-indigo-600">
-            Gamecity
+            Gamecity Beta
           </h1>
         </div>
         <div class="-mr-2 -my-2 md:hidden">
