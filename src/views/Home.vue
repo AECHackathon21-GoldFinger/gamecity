@@ -34,9 +34,7 @@ a {
 
 <script type="module">
 import * as THREE from "../../three.module.js";
-import { BoxGeometry, MeshBasicMaterial, Mesh } from "../../three.module.js";
-import { HemisphereLight } from "../../three.module.js";
-
+import { BoxGeometry, MeshBasicMaterial, HemisphereLight, Mesh } from "../../three.module.js";
 import { OrbitControls } from "../../node_modules/three/examples/jsm/controls/OrbitControls.js";
 
 let camera, controls, scene, renderer;
@@ -119,7 +117,7 @@ function init() {
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
   scene.add(ambientLight);
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.2);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
   directionalLight.position.set(1000, 750, 500);
 
   const hemiLight = new HemisphereLight(0xffffff, 0x71748f, 0.2);
@@ -239,6 +237,10 @@ function onPointerDown(event) {
       const voxel = new THREE.Mesh(cubeGeo, cubeMat);
       voxel.position.copy(intersect.point).add(intersect.face.normal);
       voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+
+      let loc = voxel.position;
+      console.log(loc);
+
       scene.add(voxel);
 
       objects.push(voxel);
