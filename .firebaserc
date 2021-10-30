@@ -1,0 +1,12 @@
+{
+  "projects": {},
+  "targets": {
+    "goldfinger-42": {
+      "hosting": {
+        "app": [
+          "gamecity"
+        ]
+      }
+    }
+  }
+}
